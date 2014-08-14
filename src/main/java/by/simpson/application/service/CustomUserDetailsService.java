@@ -34,7 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
-        JOptionPane.showMessageDialog(null, "\nCustomUserDetailsService.loadUserByUsername()\n");
         return new User(
                 domainUser.getLogin(),
                 domainUser.getPassword(),

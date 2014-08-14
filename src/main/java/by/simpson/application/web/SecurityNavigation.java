@@ -26,7 +26,7 @@ public class SecurityNavigation
         if (isGuest()) {
             return new ModelAndView("redirect:/index");
         } else if (isUser()) {
-            return new ModelAndView("user");
+            return new ModelAndView("/user/events");
         } else/* if(isAdmin())*/ {
             return new ModelAndView("redirect:/admin");
         }
@@ -37,7 +37,7 @@ public class SecurityNavigation
         if (isGuest()) {
             return new ModelAndView("redirect:/index");
         } else if (isUser()) {
-            return new ModelAndView("redirect:/user");
+            return new ModelAndView("redirect:/user/events");
         } else/* if(isAdmin())*/ {
             return new ModelAndView("admin");
         }

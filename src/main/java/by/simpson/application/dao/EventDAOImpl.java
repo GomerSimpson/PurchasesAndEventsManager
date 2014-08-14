@@ -7,8 +7,10 @@
 package by.simpson.application.dao;
 
 import by.simpson.application.entity.Event;
+import java.sql.Date;
 import java.util.List;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +25,5 @@ public class EventDAOImpl implements EventDAO
         return sessionFactory.getCurrentSession().createQuery("from Event")
                 .list();
     }
+
 }

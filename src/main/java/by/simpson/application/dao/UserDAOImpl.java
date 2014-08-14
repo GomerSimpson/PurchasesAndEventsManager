@@ -12,76 +12,90 @@ import org.hibernate.criterion.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Repository
-public class UserDAOImpl implements UserDAO {
-	
-	@Autowired
-    private SessionFactory sessionFactory;	
-	
-	public void addUser(User user){
-		sessionFactory.getCurrentSession().save(user);
-	}
-	
-	public void updateUser(Integer id){
-		User user = (User)sessionFactory.getCurrentSession().load(
-				User.class, id);
-		if (null != user) {
-                    	user.setEmail(user.getEmail());
-			sessionFactory.getCurrentSession().update(user);
-		}	
-	}
-	
-	public void deleteUser(Integer id){
-		User user = (User)sessionFactory.getCurrentSession().load(
-				User.class, id);
-		
-		if (null != user) {
-			sessionFactory.getCurrentSession().delete(user);
-		}		
-	}
-	
-	@SuppressWarnings("unchecked")
-	public  List<User> getListUsers(){
-		return sessionFactory.getCurrentSession().createQuery("from User")
-				.list();
-	}
-	
-	public User getUser(Integer id){
-		//User user = new User();
-		User user = (User)sessionFactory.getCurrentSession().load(User.class, id);
-		/*
-		user.setId_user(tempUser.getId_user());
-		user.setFirstName(tempUser.getFirstName());
-		user.setLastName(tempUser.getLastName());
-		*/
-		for(Event e : user.getEvents())
-			System.out.println(e.getName());
-		
-		for(Purchase p : user.getPurchases())
-			System.out.println(p.getName());
-                
-                for(Role r : user.getRoles())
-			System.out.println(r.getRole());
+public class UserDAOImpl implements UserDAO
+{
 
-		
-		/*user.setEmail(tempUser.getEmail());
-		user.setLogin(tempUser.getLogin());
-		System.out.println(tempUser);*/
-		return user;
-	}
-	
-        @SuppressWarnings("SuspiciousIndentAfterControlStatement")
-	public User getUser(String login){
-            User user = (User)sessionFactory.getCurrentSession().createCriteria(User.class).add(Expression.like("login", login)).list().get(0);
-            
-            for(Event e : user.getEvents())
-		System.out.println(e.getName());
-		
-            for(Purchase p : user.getPurchases())
-		System.out.println(p.getName());
-		
-            for(Role r : user.getRoles())
-		System.out.println(r.getRole());            
+    @Autowired
+    private SessionFactory sessionFactory;
 
-		return user;
-	}
+    public void addUser(User user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
+
+    public void updateUser(Integer id) {
+        User user = (User) sessionFactory.getCurrentSession().load(
+                User.class, id);
+        if (null != user) {
+            user.setEmail(user.getEmail());
+            sessionFactory.getCurrentSession().update(user);
+        }
+    }
+
+    public void deleteUser(Integer id) {
+        User user = (User) sessionFactory.getCurrentSession().load(
+                User.class, id);
+
+        if (null != user) {
+            sessionFactory.getCurrentSession().delete(user);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<User> getListUsers() {
+        List<User> list = sessionFactory.getCurrentSession().createQuery("from User")
+                .list();
+
+        return list;
+    }
+
+    public User getUser(Integer id) {
+        //User user = new User();
+        User user = (User) sessionFactory.getCurrentSession().load(User.class, id);
+        /*
+         user.setId_user(tempUser.getId_user());
+         user.setFirstName(tempUser.getFirstName());
+         user.setLastName(tempUser.getLastName());
+         */
+        for (Event e : user.getEvents()) {
+            System.out.println(e.getName());
+        }
+
+        for (Purchase p : user.getPurchases()) {
+            System.out.println(p.getName());
+        }
+
+        for (Role r : user.getRoles()) {
+            System.out.println(r.getRole());
+        }
+
+        /*user.setEmail(tempUser.getEmail());
+         user.setLogin(tempUser.getLogin());
+         System.out.println(tempUser);*/
+        return user;
+    }
+
+    @SuppressWarnings("SuspiciousIndentAfterControlStatement")
+    public User getUser(String login) {
+        List<User> users = (List<User>) sessionFactory.getCurrentSession().createCriteria(User.class).add(Expression.like("login", login)).list();
+
+        if (users.isEmpty()) {
+            return null;
+        }
+
+        User user = users.get(0);
+
+        for (Event e : user.getEvents()) {
+            System.out.println(e.getName());
+        }
+
+        for (Purchase p : user.getPurchases()) {
+            System.out.println(p.getName());
+        }
+
+        for (Role r : user.getRoles()) {
+            System.out.println(r.getRole());
+        }
+
+        return user;
+    }
 }
