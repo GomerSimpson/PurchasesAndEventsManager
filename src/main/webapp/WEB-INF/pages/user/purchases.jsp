@@ -31,7 +31,7 @@
                 width: 15.8%;
                 text-align: center;
             }
-            
+
             .logout{
                 float: right;
                 width: 5%;
@@ -101,14 +101,14 @@
             .select{
                 width: 100%;
             }
-             
+
             .text_area{
                 width: 98.5%;
                 border-style: outset;
                 resize: none;
                 background-position: bottom;
                 background-repeat: repeat-x;
-    
+
                 background-color: beige;
             }
             * {
@@ -119,7 +119,8 @@
         </style>
 
     </head>
-    <body><div class="main">
+    <body>
+        <div class="main">
             <div class="top">
                 <div class="user_info">
                     <h6>Victor Kolbik</h6>
@@ -138,11 +139,11 @@
                     <a href="${pageContext.request.contextPath}/user/events">Events</a>
                 </div>
                 <div class="set">
-                    <form method="post" id="form" action="http://localhost:8084/simpson/setPurchase">
+                    <form method="post" id="form" action="setPurchase">
                         <label>Message</label><br>
                         <textarea class="text_area" rows="4" maxlength="100"></textarea>
                         <label for="price">Price</label><br>
-                        <input type="number" id="price" name="price"><br>
+                        <input type="number" min="0" id="price" name="price"><br>
                         <label for="year">Year</label><br>
                         <select id="year" class="select" name="year" onchange="setDayOptions();">
                         </select><br>
@@ -166,19 +167,19 @@
         <script type="text/javascript" language="javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>    
         <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>      
         <script type="text/javascript">
-            var months = ["", "January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"];
-                    //    $(setYearAndMonthOptions);
-                    //    $(setDayOptions);
-                          $(setRealDate);
-                            
-                     //       $('#year').val(2014).change();
+                        var months = ["", "January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"];
+                        //    $(setYearAndMonthOptions);
+                        //    $(setDayOptions);
+                        $(setRealDate);
+
+                        //       $('#year').val(2014).change();
 //alert(document.forms.form.firstName.value);
-                        function setRealDate(){
+                        function setRealDate() {
                             setYearAndMonthOptions();
                             setDayOptions();
                             var date = new Date();
-                            
+
                             var monthSelect = document.forms.form.month;
                             var yearSelect = document.forms.form.year;
                             var daySelect = document.forms.form.day;

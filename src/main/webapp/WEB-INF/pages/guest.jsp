@@ -122,7 +122,7 @@
         </p>
         <p>
             <c:if test="${wrongLogin == true}">
-                <h1><b>login already exists.</b></h1>
+                <h1><b class="error">login already exists.</b></h1>
             </c:if>
         </p>
         <form method="post" action="<c:url value='j_spring_security_check'/>" >
@@ -138,67 +138,68 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="Login" />          <input type="button" value="Registrate!" id="popup__toggle" /></td>
+                        <td><input type="submit" value="Login" /><input type="button" value="Registrate!" id="popup__toggle" /></td>
                     </tr>
                 </tbody>
             </table>
         </form>	
-    <div class="popup__overlay">
-        <div class="popup">
-            <a href="#" class="popup__close">X</a>
-            <h2>Welcome!</h2>
-            <p>Please enter your login and password to continue</p>
-            <form method="post" action="http://localhost:8084/simpson/new_user">
-                <div class="row">
-                    <label for="firstName">firstName</label>
-                    <input type="text" id="firstName" name="firstName" value="" />
-                </div>
-                <div class="row">
-                    <label for="lastName">lastName</label>
-                    <input type="text" id="lastName" name="lastName" value="" />
-                </div>
-                <div class="row">
-                    <label for="login">Login</label>
-                    <input type="text" id="login" name="login" value="" />
-                </div>
-                <div class="row">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" value="" />
-                </div>
-                <div class="row">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" value=""/>
-                </div>
-                <input type="submit" value="Registrate" />        
-            </form>
+        <div class="popup__overlay">
+            <div class="popup">
+                <a href="#" class="popup__close">X</a>
+                <h2>Welcome!</h2>
+                <p>Please enter your login and password to continue</p>
+                <form method="post" action="new_user">
+                    <div class="row">
+                        <label for="firstName">firstName</label>
+                        <input type="text" id="firstName" name="firstName" value="" />
+                    </div>
+                    <div class="row">
+                        <label for="lastName">lastName</label>
+                        <input type="text" id="lastName" name="lastName" value="" />
+                    </div>
+                    <div class="row">
+                        <label for="login">Login</label>
+                        <input type="text" id="login" name="login" value="" />
+                    </div>
+                    <div class="row">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" value="" />
+                    </div>
+                    <div class="row">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" value=""/>
+                    </div>
+                    <input type="submit" value="Registrate" />        
+                </form>
+            </div>
         </div>
-    </div>
-   <!--  <a href="${pageContext.request.contextPath}/admin.html">Login as  an Administrator</a><br/>-->
-        </p>
-<script type="text/javascript" language="javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>      <!--Atention!!!!   a local file!!!!! you shold use http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js-->
-    <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>       <!--   Atention!!!!   a local file!!!!! you shold use http://www.technicalkeeda.com/js/javascripts/plugin/json2.js-->
-    <script type="text/javascript">
-        /*    function sendData(){
-         $.ajax({
-         type: "post"
-         url:  "http://localhost:8084/simpson/new_user"
-         //dataType: "json"
-         });
-         }*/
-        p = $('.popup__overlay');
-        $('#popup__toggle').click(function() {
-            p.css('display', 'block');
-        });
-        p.click(function(event) {
-            e = event || window.event;
-            if (e.target == this) {
-                $(p).css('display', 'none');
-            }
-        });
-        $('.popup__close').click(function() {
-            p.css('display', 'none');
-        });
+       <!--  <a href="${pageContext.request.contextPath}/admin.html">Login as  an Administrator</a><br/>-->
+        <script type="text/javascript" language="javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>      <!--Atention!!!!   a local file!!!!! you shold use http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js-->
+        <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>       <!--   Atention!!!!   a local file!!!!! you shold use http://www.technicalkeeda.com/js/javascripts/plugin/json2.js-->
+        <script type="text/javascript">
+            /*    function sendData(){
+             $.ajax({
+             type: "post"
+             url:  "http://localhost:8084/simpson/new_user"
+             //dataType: "json"
+             });
+             }*/
 
-    </script>
+                p = $('.popup__overlay');
+                alert("qwerty");
+                $('#popup__toggle').click(function() {
+                    p.css('display', 'block');
+                });
+                p.click(function(event) {
+                    e = event || window.event;
+                    if (e.target == this) {
+                        $(p).css('display', 'none');
+                    }
+                });
+                $('.popup__close').click(function() {
+                    p.css('display', 'none');
+                });
+  
+        </script>
     </body>
 </html>

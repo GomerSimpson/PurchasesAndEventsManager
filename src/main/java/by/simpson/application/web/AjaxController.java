@@ -57,7 +57,7 @@ public class AjaxController
             u.setRoles(null);
         }
 
-        JOptionPane.showMessageDialog(null, list.toString());
+        //JOptionPane.showMessageDialog(null, list.toString());
         Gson gson = new Gson();
         String json = gson.toJson(list);
         return json;
@@ -68,7 +68,7 @@ public class AjaxController
     String deleteUser(HttpServletRequest request, HttpServletResponse response) throws Exception {
         
 
-        JOptionPane.showMessageDialog(null, request.getParameter("id"));
+        JOptionPane.showMessageDialog(null, request.getParameter("id") + "deleteUser");
 
         return "{}";
     }
