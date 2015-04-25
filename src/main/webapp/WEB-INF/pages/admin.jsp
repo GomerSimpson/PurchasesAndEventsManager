@@ -24,6 +24,14 @@
                 float: left;
                 background: gold;
             }
+
+            .update{
+                background: #e7f3d4;
+                background: rgba(184,243,85,0.3);
+                width: 100%;
+                height: 100%; 
+                border: 0px;
+            }
             .user_info{
                 float: left;
                 background: springgreen;
@@ -177,12 +185,12 @@
             {
                 background: #efefef;
                 background: rgba(144,144,144,0.15);
-                border-right: 1px solid white;
+                border-right: 0px;
             }
             .features-table td.green
             {
                 background: #e7f3d4;
-                background: rgba(184,243,85,0.3);
+//                background: rgba(184,243,85,0.3);
             }
             .features-table td:nowrap
             {
@@ -214,7 +222,7 @@
         <div class="main">
             <div class="top">
                 <div class="user_info">
-                    <h6>Victor Kolbik</h6>
+                    <h3>Admin</h3>
                 </div>
                 <h2>Purchases!</h2>
             </div>
@@ -259,6 +267,7 @@
         <script type="text/javascript" language="javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>    
         <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>      
         <script type="text/javascript">
+            
             $(getData);
             p = $('.popup__overlay');
             p.click(function(event) {
@@ -276,43 +285,50 @@
                 var html = "<TABLE class=\"features-table\" summary=\"list users.\"><CAPTION>LIST USERS</CAPTION>";
                 html += "<COLGROUP align=\"center\"><COLGROUP align=\"left\"> <COLGROUP align=\"center\" span=\"2\"><COLGROUP align=\"center\" span=\"3\">";
                 html += "<tr><td><h2>Id</h2><td><h2>Login</h2><td><h2>Password</h2><td><h2>E-mail</h2><td><h2>Update</h2><td><h2>Delete</h2>";
+
                 for (var user in data) {
                     html += "<TR><TD class=\"grey\">";
                     html += data[user].id;
                     html += "<TD class=\"green\">";
-                    html += data[user].login;
+                    html += '<input type="text" class="update" value=' + data[user].login + '>';
                     html += "<TD class=\"green\">";
-                    html += data[user].password;
+                    html += '<input type="text" class="update" value=' + data[user].password + '>';
                     html += "<TD class=\"green\">";
-                    html += data[user].email;
+                    html += '<input type="text" class="update" value=' + data[user].email + '>';
                     html += "<TD class=\"grey\">";
-                    html += '<input type="button" value="Up" onclick="updateUser(' + data[user].id + ')"/>';
+                    html += '<input type="button" value="Up" onclick="setFields(' + data[user] + ')"/>';
                     html += "<TD class=\"grey\">";
                     html += '<input type="button" value="Del" onclick="deleteUser(' + data[user].id + ')"/>';
                 }
+var td_cells=document.getElementsByClassName('features-table')
 
+for (var i=0; i < td_cells.length; i++)
+
+alert(td_cells[i].innerHTML);
                 $('#table').html("");
                 $('#table').html(html);
             }
 
-            function updateUser(id) {
-                p = $('.popup__overlay');
-                p.css('display', 'block');
+        /*    function updateUser(id, login, password, login) {
+               // p = $('.popup__overlay');
+               // p.css('display', 'block');
 
                 $.ajax({
                     type: "get",
-                    url: "getUser",
+                    url: "/simpson/updateUser",
                     cache: false,
-                    data: {"id": id},
-                    success: setFields,
+                    data: {"id": id, "login": login, "password": password, "email": email},
+                    success: function(){
+                        alert("User " + login + "is udated");
+                    },
                     error: function() {
-                        alert('Request Error');
+                        alert('Request from updateUser(), in event.jsp, to updateUser, in AjaxController.java, has failed');
                     }
                 });
-
-            }
+            }*/
 
             function setFields(user) {
+                alert(user);
                 document.getElementById('firstName').value = user.firstName;
                 document.getElementById('lastName').value = user.lastName;
                 document.getElementById('login').value = user.login;
@@ -326,11 +342,11 @@
                 } else {
                     $.ajax({
                         type: "get",
-                        url: "deleteUser",
+                        url: "/simpson/deleteUser",
                         data: {"id": id},
                         cache: false,
                         success: function(request) {
-                            alert("request");
+                            alert("User is deleted");
                         },
                         error: function() {
                             alert('Request Error');

@@ -4,7 +4,10 @@ import by.simpson.application.entity.Event;
 import by.simpson.application.entity.Purchase;
 import by.simpson.application.entity.Role;
 import by.simpson.application.entity.User;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Repository;
 import org.hibernate.SessionFactory;
@@ -57,15 +60,15 @@ public class UserDAOImpl implements UserDAO
          user.setLastName(tempUser.getLastName());
          */
         for (Event e : user.getEvents()) {
-            System.out.println(e.getName());
+            //    System.out.println(e.getName());
         }
 
         for (Purchase p : user.getPurchases()) {
-            System.out.println(p.getName());
+            //  System.out.println(p.getName());
         }
 
         for (Role r : user.getRoles()) {
-            System.out.println(r.getRole());
+            //    System.out.println(r.getRole());
         }
 
         /*user.setEmail(tempUser.getEmail());
@@ -85,17 +88,87 @@ public class UserDAOImpl implements UserDAO
         User user = users.get(0);
 
         for (Event e : user.getEvents()) {
-            System.out.println(e.getName());
+            //      System.out.println(e.getName());
         }
 
         for (Purchase p : user.getPurchases()) {
-            System.out.println(p.getName());
+            //    System.out.println(p.getName());
         }
 
         for (Role r : user.getRoles()) {
-            System.out.println(r.getRole());
+            //  System.out.println(r.getRole());
         }
 
         return user;
+    }
+
+    public void setEvent(String login, Event event) {
+        User user = (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Expression.like("login", login)).list().get(0);
+        user.setEvent(event);
+        sessionFactory.getCurrentSession().update(user);
+    }
+
+    public List<Event> getUserEvents(String login, Date date) {
+
+        /* List<Event> events = (List<Event>) sessionFactory.getCurrentSession().createCriteria(User.class)
+         .add(Expression.like("id", id)).add(Expression.like("date", date)).list();*/
+        User user = getUser(login);
+        List<Event> events = new ArrayList<Event>();
+
+        for (Event e : user.getEvents()) {
+            if (e.getDate().getDate() == date.getDate() && e.getDate().getMonth() == date.getMonth() && e.getDate().getYear() == date.getYear()) {
+                //          e.setUser(null);
+                events.add(e);
+
+            }
+            //      System.out.println(e.getDate().getDate() +  " or  " + date.getDate());
+            //    System.out.println((e.getDate().getDate() == date.getDate()) + " " + " " + (e.getDate().getMonth() == date.getMonth()) + " " + (e.getDate().getYear() == date.getYear()));
+        }
+
+        //JOptionPane.showMessageDialog(null, events);
+        return events;
+
+    }
+
+    public void deleteEvent(Integer id) {
+        Event event = (Event) sessionFactory.getCurrentSession().load(
+                Event.class, id);
+
+        if (null != event) {
+            sessionFactory.getCurrentSession().delete(event);
+        }
+    }
+
+    public List<Purchase> getUserPurchases(String login, Date date) {
+        User user = getUser(login);
+        List<Purchase> purchases = new ArrayList<Purchase>();
+
+        for (Purchase p : user.getPurchases()) {
+            if (p.getDate().getDate() == date.getDate() && p.getDate().getMonth() == date.getMonth() && p.getDate().getYear() == date.getYear()) {
+                //          e.setUser(null);
+                purchases.add(p);
+
+            }
+            //      System.out.println(e.getDate().getDate() +  " or  " + date.getDate());
+            //    System.out.println((e.getDate().getDate() == date.getDate()) + " " + " " + (e.getDate().getMonth() == date.getMonth()) + " " + (e.getDate().getYear() == date.getYear()));
+        }
+
+        //JOptionPane.showMessageDialog(null, events);
+        return purchases;
+    }
+
+    public void setPurchase(String login, Purchase purchase) {
+        User user = (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Expression.like("login", login)).list().get(0);
+        user.setPurchase(purchase);
+        sessionFactory.getCurrentSession().update(user);
+    }
+
+    public void deletePurchase(Integer id) {
+        Purchase purchase = (Purchase) sessionFactory.getCurrentSession().load(
+                Purchase.class, id);
+
+        if (null != purchase) {
+            sessionFactory.getCurrentSession().delete(purchase);
+        }
     }
 }

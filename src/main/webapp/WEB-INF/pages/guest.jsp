@@ -174,8 +174,8 @@
             </div>
         </div>
        <!--  <a href="${pageContext.request.contextPath}/admin.html">Login as  an Administrator</a><br/>-->
-        <script type="text/javascript" language="javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>      <!--Atention!!!!   a local file!!!!! you shold use http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js-->
-        <script type="text/javascript" src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>       <!--   Atention!!!!   a local file!!!!! you shold use http://www.technicalkeeda.com/js/javascripts/plugin/json2.js-->
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/main.js"></script>
         <script type="text/javascript">
             /*    function sendData(){
              $.ajax({
@@ -186,7 +186,7 @@
              }*/
 
                 p = $('.popup__overlay');
-                alert("qwerty");
+        
                 $('#popup__toggle').click(function() {
                     p.css('display', 'block');
                 });

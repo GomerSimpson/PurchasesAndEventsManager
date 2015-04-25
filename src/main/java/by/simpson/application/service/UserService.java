@@ -1,8 +1,11 @@
 package by.simpson.application.service;
 
+import by.simpson.application.entity.Event;
+import by.simpson.application.entity.Purchase;
 import java.util.List;
 
 import by.simpson.application.entity.User;
+import java.sql.Date;
 
 public interface UserService {
 	public void addUser(User user);
@@ -11,4 +14,10 @@ public interface UserService {
 	public List<User> getListUsers();
 	public User getUser(Integer id);
 	public User getUser(String login);
+        public List<Event> getUserEvents(String login, Date date);
+        public void setEvent(String login, Event event);
+        public void deleteEvent(Integer id);
+        public List<Purchase> getUserPurchases(String login, Date date);
+        public void setPurchase(String login, Purchase purchase);
+        public void deletePurchase(Integer id);
 }
